@@ -1,0 +1,48 @@
+{
+  "name": "icebreaker-api",
+  "version": "1.0.0",
+  "description": "Backend for the icebreaker app",
+  "main": "main.js",
+  "repository": "https://github.com/hunter695/icebreaker-api.git",
+  "author": "Igor Goldvekht",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon ./node_modules/.bin/babel-node main.js",
+    "lint:js": "eslint --ignore-path .gitignore --",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "precommit": "yarn lint-staged",
+    "prepush": "yarn test",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "lint:js"
+    ]
+  },
+  "moduleRoots": [
+    "src"
+  ],
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-eslint": "^7.1.1",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "eslint": "^3.17.0",
+    "eslint-plugin-import": "^2.2.0",
+    "husky": "^0.13.2",
+    "jest": "^19.0.2",
+    "lint-staged": "^3.3.1",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
