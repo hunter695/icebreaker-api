@@ -1,7 +1,10 @@
 node_modules
 
-# ignore csv folder
+# ignore csv folders
 csv/
+
+# ignore test folders
+test/
 
 # ignore config.js file
 config.js
