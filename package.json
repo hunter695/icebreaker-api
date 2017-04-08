@@ -43,6 +43,8 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "mongodb": "^2.2.25",
+    "twit": "^2.2.5"
   }
 }
