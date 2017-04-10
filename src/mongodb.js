@@ -1,10 +1,10 @@
 module.exports = {
   /**
    * Randomly samples a document from 'wildcard' database.
-   * @param {Object} db database from MongoDB connection.
-   * @param {String} col collection name of wildcard database.
-   * @param {String} amount amount of randomly selected documents to retrieve.
-   * @return {Object} promise to retrieve a randomly selected document.
+   * @param {object} db database from MongoDB connection.
+   * @param {string} col collection name of wildcard database.
+   * @param {string} amount amount of randomly selected documents to retrieve.
+   * @return {object} promise to retrieve a randomly selected document.
    */
   sampleWildcard(db, col, amount) {
     return new Promise((resolve, reject) => {
@@ -24,10 +24,10 @@ module.exports = {
   },
   /**
    * increments likes of document with _id id by amount
-   * @param {Object} db database from MongoDB connection
+   * @param {object} db database from MongoDB connection
    * @param {string} callback collection name for database.
-   * @param {Object} id of document to update.
-   * @param {Integer} amount of likes to increment
+   * @param {object} id of document to update.
+   * @param {integer} amount of likes to increment
    */
   addLikes(db, col, id, amount) {
     if (!db) {
@@ -38,10 +38,10 @@ module.exports = {
   },
   /**
    * increments dislikes of document with _id id by amount
-   * @param {Object} db database from MongoDB connection
+   * @param {object} db database from MongoDB connection
    * @param {string} callback collection name for database.
-   * @param {Object} id of document to update.
-   * @param {Integer} amount of likes to increment
+   * @param {object} id of document to update.
+   * @param {integer} amount of likes to increment
    */
   addDislikes(db, col, id, amount) {
     if (!db) {
@@ -52,10 +52,10 @@ module.exports = {
   },
   /**
    * Stores tweets into MongoDB database col
-   * @param {Object} db MongoDB database connection
+   * @param {ibject} db MongoDB database connection
    * @param {col} col MongoDB collection to store in.
-   * @param {Object} content the object to store into MongoDB database.
-   * @return {String} the id of inserted content.
+   * @param {object} content the object to store into MongoDB database.
+   * @return {string} the id of inserted content.
    */
   async storeOne(db, col, content) {
     let result
