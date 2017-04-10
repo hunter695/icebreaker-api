@@ -3,16 +3,9 @@ import config from '../config' // for Twitter API keys and MongoDB URL
 
 const mongodb = require('mongodb')
 
-it('Should be able to connect to MongoDB.', () => {
-  mongodb.MongoClient.connect(config.mongodb.url, async (connectErr, db) => {
-    expect(connectErr).toBeFalsy()
-    db.close()
-  })
-})
-
 it('Stored document text should be retrieved.', () => {
   mongodb.MongoClient.connect(config.mongodb.url, async (connectErr, db) => {
-    expect(connectErr).toBeFalsy()
+    expect(db).toBeTruthy()
     let insertedId
     const content = {
       text: 'tasty meatloaf',
@@ -42,7 +35,7 @@ it('Stored document text should be retrieved.', () => {
 
 it('Randomly sampling collection should return truthy', () => {
   mongodb.MongoClient.connect(config.mongodb.url, async (connectErr, db) => {
-    expect(connectErr).toBeFalsy()
+    expect(db).toBeTruthy()
     let insertedId
     const content = {
       text: 'tasty meatloaf',
