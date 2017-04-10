@@ -3,15 +3,16 @@ module.exports = {
    * Randomly samples a document from 'wildcard' database.
    * @param {Object} db database from MongoDB connection.
    * @param {String} col collection name of wildcard database.
+   * @param {String} amount amount of randomly selected documents to retrieve.
    * @return {Object} promise to retrieve a randomly selected document.
    */
-  sampleWildcard(db, col) {
+  sampleWildcard(db, col, amount) {
     return new Promise((resolve, reject) => {
       if (!db) {
         reject('ERROR: invalid database!')
       }
       const cursor = db.collection(col)
-      .aggregate([{ $sample: { size: 1 } }])
+      .aggregate([{ $sample: { size: amount } }])
       cursor.each((err, doc) => {
         if (doc) {
           resolve(doc)
@@ -61,9 +62,9 @@ module.exports = {
     if (!db) {
       throw Error('ERROR: invalid database!')
     } else {
-      try{
+      try {
         result = await db.collection(col).insertOne(content)
-      } catch(storeErr) {
+      } catch (storeErr) {
         throw Error(storeErr)
       }
       return result.insertedId
