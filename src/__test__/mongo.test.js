@@ -53,7 +53,7 @@ it('Randomly sampling collection should return truthy', () => {
     try {
       insertedId = await storeOne(db, 'test', content)
       const sample = await sampleWildcard(db, 'test', 1)
-      expect(sample.text).toBeDefined()
+      expect(sample.text).toBeTruthy()
       db.collection('test').remove({ _id: insertedId })
     } catch (storeErr) {
       expect(storeErr).toBeFalsy()
