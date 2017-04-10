@@ -1,8 +1,9 @@
 module.exports = {
   /**
    * Randomly samples a document from 'wildcard' database.
-   * @param {Object} db database from MongoDB connection
-   * @param {String} col collection name of wildcard database
+   * @param {Object} db database from MongoDB connection.
+   * @param {String} col collection name of wildcard database.
+   * @return {Object} promise to retrieve a randomly selected document.
    */
   sampleWildcard(db, col) {
     return new Promise((resolve, reject) => {
@@ -15,7 +16,7 @@ module.exports = {
         if (doc) {
           resolve(doc)
         } else {
-          reject('Unable to retrieve document')
+          reject('ERROR: Unable to retrieve document')
         }
       })
     })
@@ -53,16 +54,19 @@ module.exports = {
    * @param {Object} db MongoDB database connection
    * @param {col} col MongoDB collection to store in.
    * @param {Object} content the object to store into MongoDB database.
+   * @return {String} the id of inserted content.
    */
-  store(db, col, content) {
+  async storeOne(db, col, content) {
+    let result
     if (!db) {
       throw Error('ERROR: invalid database!')
     } else {
-      db.collection(col).insert(content, (insertError) => {
-        if (insertError) {
-          throw new Error(`Insert error: ${insertError}`)
-        }
-      })
+      try{
+        result = await db.collection(col).insertOne(content)
+      } catch(storeErr) {
+        throw Error(storeErr)
+      }
+      return result.insertedId
     }
   },
 }
