@@ -1,1 +1,7 @@
 node_modules
+
+# ignore csv folders
+csv/
+
+# ignore config.js file
+config.js
