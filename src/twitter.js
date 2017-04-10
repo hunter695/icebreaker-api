@@ -13,7 +13,8 @@ module.exports = {
    * @param {number} amount how many tweets you want back.
    * @param {string} daysBack how far back in time to get tweets
    * @param {requestCallback} callback runs after successful Twitter API call,
-   * with an object containing information from tweet passed to it.
+   * with an object containing information from tweet passed to it. If the
+   * retrieval fails, the null is passed to callback().
    */
   async getWildcardFromTwitter(content, amount, daysBack, callback) {
     let tweet
