@@ -1,4 +1,4 @@
-import { loadCurated } from './load_curated'
+import { load } from './curated'
 
-loadCurated('icebreaker_curated', './icebreakers.csv')
-loadCurated('pickupline_curated', './pickuplines.csv')
+load('icebreaker_curated', './icebreakers.csv')
+load('pickupline_curated', './pickuplines.csv')
