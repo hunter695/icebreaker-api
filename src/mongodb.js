@@ -51,18 +51,55 @@ module.exports = {
     }
   },
   /**
-   * Stores tweets into MongoDB database col
-   * @param {ibject} db MongoDB database connection
-   * @param {col} col MongoDB collection to store in.
+   * Stores content object into MongoDB database. The schema  of the object
+   * should be:
+   *
+   *  {
+   *	 "text" : "tasty meatloaf",
+   *   "author" : "Gordon Ramsay",
+   *	 "likes" : 2,
+   *	 "dislikes" : 123
+   *  }
+   *
+   * @param {object} db MongoDB database connection
+   * @param {string} col MongoDB collection to store in.
    * @param {object} content the object to store into MongoDB database.
    * @return {string} the id of inserted content.
    */
-  async storeOne(db, col, content) {
+  async storeObject(db, col, content) {
     let result
     if (!db) {
       throw Error('ERROR: invalid database!')
     } else {
       try {
+        result = await db.collection(col).insertOne(content)
+      } catch (storeErr) {
+        throw Error(storeErr)
+      }
+      return result.insertedId
+    }
+  },
+  /**
+   * Stores tweets into MongoDB database col
+   * @param {object} db MongoDB database connection
+   * @param {string} col MongoDB collection to store in. In this case it has to
+   * be either icebreaker_wildcard or pickuplines_wildcard.
+   * @param {string} text the icebreaker or pickupline text.
+   * @param {string} author the author of the text.
+   * @return {string} the id of inserted content.
+   */
+  async storeContribution(db, col, text, author) {
+    let result
+    if (!db) {
+      throw Error('ERROR: invalid database!')
+    } else {
+      try {
+        const content = {
+          text: text,
+          author: author,
+          likes: 0,
+          dislikes: 0,
+        }
         result = await db.collection(col).insertOne(content)
       } catch (storeErr) {
         throw Error(storeErr)
