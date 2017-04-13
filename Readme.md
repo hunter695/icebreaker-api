@@ -45,4 +45,4 @@ From the root of the project directory, do:
 $ babel-node --presets latest src/csv/load.js
 ```
 This will load curated CSV data into two MongoDB collections:
-`icebreaker_curated` and `pickuplines_curated`.
+`icebreaker_curated` and `pickupline_curated`.
