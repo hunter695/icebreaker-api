@@ -5,15 +5,16 @@ const parse = require('csv-parse')
 const fs = require('fs')
 const path = require('path')
 
+const mongodbURL = config.mongodb.url
+const MongoClient = mongodb.MongoClient
+
 module.exports = {
   /**
    * Parses csv file calling parse_file() and store into MongoDB
    * @param {string} col MongoDB collection name to insert into.
    * @param {string} filePath is the path to the csv file.
    */
-  loadCurated(col, filePath) {
-    const mongodbURL = config.mongodb.url
-    const MongoClient = mongodb.MongoClient
+  load(col, filePath) {
     // connect to MongoDB
     MongoClient.connect(mongodbURL, (mongodbError, db) => {
       if (mongodbError) {
@@ -51,6 +52,20 @@ module.exports = {
         })
         // streams from csv location while parsing is busy
         fs.createReadStream(path.join(__dirname, filePath)).pipe(parser)
+      }
+    })
+  },
+  drop(collection) {
+    MongoClient.connect(mongodbURL, async (mongodbError, db) => {
+      try {
+        const cursor = await db.collection(collection).findOne()
+        if (cursor) {
+          await db.collection(collection).drop()
+        }
+      } catch (err) {
+        throw Error(err)
+      } finally {
+        db.close()
       }
     })
   },
