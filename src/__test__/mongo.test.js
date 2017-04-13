@@ -1,4 +1,4 @@
-import { sampleWildcard, addLikes, storeObject, storeContribution } from '../mongodb'
+import { sampleWildcard, storeObject, storeContribution } from '../mongodb'
 import config from '../config' // for Twitter API keys and MongoDB URL
 
 const mongodb = require('mongodb')
