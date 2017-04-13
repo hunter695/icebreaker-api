@@ -20,6 +20,7 @@ it('Stored document text should be retrieved.', () => {
       try {
         // find the inserted document by its returned ID.
         cursor = await db.collection('test').findOne({ _id: insertedId }, {})
+        expect(cursor).toBeTruthy()
       } catch (findErr) {
         expect(findErr).toBeFalsy()
       }
@@ -67,6 +68,7 @@ it('storeContribution test', () => {
       try {
         // find the inserted document by its returned ID.
         cursor = await db.collection('test').findOne({ _id: insertedId }, {})
+        expect(cursor).toBeTruthy()
       } catch (findErr) {
         expect(findErr).toBeFalsy()
       }
@@ -90,6 +92,7 @@ it('curated csv database addLikes test', () => {
     try {
       // find the inserted document by its returned ID.
       cursor = await db.collection('icebreaker_curated').findOne()
+      expect(cursor).toBeTruthy()
       currentLikes = cursor.likes
     } catch (findErr) {
       expect(findErr).toBeFalsy()
@@ -108,13 +111,14 @@ it('curated csv database addLikes test', () => {
     try {
       // find the inserted document by its returned ID.
       cursor = await db.collection('icebreaker_curated').findOne({ _id: objectId }, {})
+      expect(cursor).toBeTruthy()
     } catch (findErr) {
       expect(findErr).toBeFalsy()
     }
 
     // verify that the difference is 10
     expect(cursor.likes - currentLikes).toBe(10)
-    
+
     // reset the value so nothing is changed at the end of this test
     try {
       // find the inserted document by its returned ID.
