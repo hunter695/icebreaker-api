@@ -8,7 +8,7 @@ const T = twit(config.twitter)
 
 module.exports = {
   /**
-   * passes acquired wildcard tweet to callback
+   * Passes acquired wildcard tweet to callback
    * @param {string} content a string such as 'pickupline(s)' or 'icebreaker(s)'
    * @param {number} amount how many tweets you want back.
    * @param {string} daysBack how far back in time to get tweets

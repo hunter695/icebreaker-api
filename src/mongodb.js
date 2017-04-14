@@ -37,7 +37,7 @@ module.exports = {
     }
   },
   /**
-   * increments dislikes of document with _id id by amount
+   * Increments dislikes of document with _id id by amount
    * @param {object} db database from MongoDB connection
    * @param {string} callback collection name for database.
    * @param {object} id of document to update.
@@ -51,7 +51,7 @@ module.exports = {
     }
   },
   /**
-   * Stores content object into MongoDB database. The schema  of the object
+   * Stores content object into MongoDB database. The schema of the object
    * should be:
    *
    *  {
@@ -80,7 +80,7 @@ module.exports = {
     }
   },
   /**
-   * Stores tweets into MongoDB database col
+   * Stores document given text and author into MongoDB database.
    * @param {object} db MongoDB database connection
    * @param {string} col MongoDB collection to store in. In this case it has to
    * be either icebreaker_wildcard or pickuplines_wildcard.
