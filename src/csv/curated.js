@@ -10,7 +10,7 @@ const MongoClient = mongodb.MongoClient
 
 module.exports = {
   /**
-   * Parses csv file calling parse_file() and store into MongoDB
+   * Parses csv file into MongoDB.
    * @param {string} col MongoDB collection name to insert into.
    * @param {string} filePath is the path to the csv file.
    */
@@ -18,15 +18,17 @@ module.exports = {
     // connect to MongoDB
     MongoClient.connect(mongodbURL, (mongodbError, db) => {
       if (mongodbError) {
+        db.close()
         throw Error(`Unable to connect, error: ${mongodbError}`)
       } else {
       // parse csv files
         const list = []
         const storelines = []
         // array 'list' contains one row of all entries in pairs
-        const parser = parse({ delimiter: ',' }, (err, data) => {
-          if (err) {
-            throw Error(`File ${filePath} parsing error: ${err}`)
+        const parser = parse({ delimiter: ',' }, (parseErr, data) => {
+          if (parseErr) {
+            db.close()
+            throw Error(`File ${filePath} parsing error: ${parseErr}`)
           } else {
             list.push(data)
             const row = list[0]
@@ -44,10 +46,10 @@ module.exports = {
           const collection = db.collection(col)
           collection.insert(storelines, (insertError) => {
             // console.log(`DB insert result: ${records.ops[0]._id}`)
+            db.close()
             if (insertError) {
               throw Error(`insert error: ${insertError}`)
             }
-            db.close()
           })
         })
         // streams from csv location while parsing is busy
@@ -55,12 +57,16 @@ module.exports = {
       }
     })
   },
-  drop(collection) {
+  /**
+   * Drops a collection from Mongodb.
+   * @param {string} col MongoDB collection name to drop.
+   */
+  drop(col) {
     MongoClient.connect(mongodbURL, async (mongodbError, db) => {
       try {
-        const cursor = await db.collection(collection).findOne()
+        const cursor = await db.collection(col).findOne()
         if (cursor) {
-          await db.collection(collection).drop()
+          await db.collection(col).drop()
         }
       } catch (err) {
         throw Error(err)
