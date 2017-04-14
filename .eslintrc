@@ -36,5 +36,6 @@
     "import/no-unresolved": 2,
     "import/prefer-default-export": 0,
     "keyword-spacing": ["error", { "before": true }],
+    "object-shorthand": "error",
   }
 }

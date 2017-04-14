@@ -55,10 +55,10 @@ module.exports = {
    * should be:
    *
    *  {
-   *	 "text" : "tasty meatloaf",
+   *    "text" : "tasty meatloaf",
    *   "author" : "Gordon Ramsay",
-   *	 "likes" : 2,
-   *	 "dislikes" : 123
+   *   "likes" : 2,
+   *   "dislikes" : 123
    *  }
    *
    * @param {object} db MongoDB database connection
@@ -95,8 +95,8 @@ module.exports = {
     } else {
       try {
         const content = {
-          text: text,
-          author: author,
+          text,
+          author,
           likes: 0,
           dislikes: 0,
         }
