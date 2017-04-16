@@ -5,7 +5,7 @@
  * @param {string} amount amount of randomly selected documents to retrieve.
  * @return {object} promise to retrieve a randomly selected document.
  */
-export function sampleWildcard(db, col, amount=1) {
+export function getRandomDocument(db, col, amount=1) {
   return new Promise((resolve, reject) => {
     if (!db) {
       reject('ERROR: invalid database!')

@@ -1,4 +1,4 @@
-import { sampleWildcard, storeObject, storeContribution } from '../mongodb'
+import { getRandomDocument, storeObject, storeContribution } from '../mongodb'
 import config from '../config' // for Twitter API keys and MongoDB URL
 
 const mongodb = require('mongodb')
@@ -41,7 +41,7 @@ it('Randomly sampling collection should return a document', async () => {
     }
 
     const insertedId = await storeObject(db, 'test', content)
-    const sample = await sampleWildcard(db, 'test', 1)
+    const sample = await getRandomDocument(db, 'test', 1)
     expect(sample.text).toBeTruthy()
     await db.collection('test').remove({ _id: insertedId })
   } finally {
