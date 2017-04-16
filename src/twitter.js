@@ -9,13 +9,12 @@ const T = twit(config.twitter)
 /**
  * Passes acquired wildcard tweet to callback
  * @param {string} content a string such as 'pickupline(s)' or 'icebreaker(s)'
- * @param {number} amount how many tweets you want back.
  * @param {string} daysBack how far back in time to get tweets
  * @param {requestCallback} callback runs after successful Twitter API call,
  * with an object containing information from tweet passed to it. If the
  * retrieval fails, the null is passed to callback().
  */
-export async function getWildcardFromTwitter(content, amount, daysBack, callback) {
+export async function getWildcardFromTwitter(content, daysBack, callback) {
   let tweet
   let result
   let date
@@ -29,7 +28,7 @@ export async function getWildcardFromTwitter(content, amount, daysBack, callback
     q: `#${content} since:${date}`,
     lang: 'en',
     result_type: 'recent',
-    count: amount,
+    count: 1,
   }
   T.get('search/tweets', params, (twitterError, data, response) => {
     tweet = data.statuses
