@@ -1,4 +1,4 @@
-import { getWildcardFromTwitter } from '../twitter'
+import { getTweet } from '../twitter'
 import config from '../config' // for twitter API and MongoDB URL
 
 const twit = require('twit') // module for interacting with Twitter API
@@ -12,7 +12,7 @@ it('Should be able to fetch content from Twitter', async () => {
     idString = data.id_str
   })
   // get message from Twitter with #helloworld
-  let result = await getWildcardFromTwitter('helloworld', daysBack)
+  let result = await getTweet('helloworld', daysBack)
   expect(result).toBeTruthy()
   // delete the message
   await T.post('statuses/destroy/:id', { id: idString })
