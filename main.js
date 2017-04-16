@@ -41,7 +41,6 @@ app.get('/pickup', async (req, res) => {
 })
 
 app.post('/icebreaker', async (req, res) => {
-  console.log(req.body)
   try {
     const id = await storeContribution(db, ICEBREAKER_WILD, req.body.text, req.body.author)
     res.status(200).send({ id })
@@ -51,7 +50,6 @@ app.post('/icebreaker', async (req, res) => {
 })
 
 app.post('/pickup', async (req, res) => {
-  console.log(req.body)
   try {
     const id = await storeContribution(db, PICKUP_WILD, req.body.text, req.body.author)
     res.status(200).send({ id })
