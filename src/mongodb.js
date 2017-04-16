@@ -13,7 +13,14 @@ export function getRandomDocument(db, col) {
     db.collection(col)
       .aggregate([{ $sample: { size: 1 } }], (err, result) => {
         if (err) reject(err)
-        resolve(result[0] || {})
+
+        const document = result[0]
+        if (!document) {
+          resolve({})
+        } else {
+          document.collection = col
+          resolve(document)
+        }
       })
   })
 }
