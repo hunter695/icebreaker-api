@@ -7,14 +7,13 @@ const twit = require('twit') // module for interacting with Twitter API
 const T = twit(config.twitter)
 
 /**
- * Passes acquired wildcard tweet to callback
+ * Returns tweet details with hashtage of content param.
  * @param {string} content a string such as 'pickupline(s)' or 'icebreaker(s)'
  * @param {number} amount how many tweets you want back.
  * @param {string} daysBack how far back in time to get tweets
- * with an object containing information from tweet passed to it. If the
- * retrieval fails, the null is passed to callback().
+ * @return {object} object containing tweet information.
  */
-export async function getWildcardFromTwitter(content, daysBack) {
+export async function getTweet(content, daysBack) {
   let date
   try {
     date = await getPastDate(daysBack)
@@ -36,7 +35,7 @@ export async function getWildcardFromTwitter(content, daysBack) {
   }
   let result
   const tweet = twitterResult.data.statuses
-  if (twitterResult.resp.statusCode === 200 || (Array.isArray(tweet) && tweet.length !== 0)) {
+  if (twitterResult.resp.statusCode === 200 && (Array.isArray(tweet) && tweet.length !== 0)) {
     result = {
       text: tweet[0].text,
       author: tweet[0].user.screen_name,
