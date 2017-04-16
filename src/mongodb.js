@@ -5,7 +5,7 @@
  * @param {string} amount amount of randomly selected documents to retrieve.
  * @return {object} promise to retrieve a randomly selected document.
  */
-export function sampleWildcard(db, col, amount) {
+export function sampleWildcard(db, col, amount=1) {
   return new Promise((resolve, reject) => {
     if (!db) {
       reject('ERROR: invalid database!')
@@ -29,7 +29,7 @@ export function sampleWildcard(db, col, amount) {
  * @param {object} id of document to update.
  * @param {integer} amount of likes to increment
  */
-export function addLikes(db, col, id, amount) {
+export function addLikes(db, col, id, amount=1) {
   if (!db) {
     throw Error('ERROR: invalid database!')
   } else {
@@ -44,7 +44,7 @@ export function addLikes(db, col, id, amount) {
  * @param {object} id of document to update.
  * @param {integer} amount of likes to increment
  */
-export function addDislikes(db, col, id, amount) {
+export function addDislikes(db, col, id, amount=1) {
   if (!db) {
     throw Error('ERROR: invalid database!')
   } else {
