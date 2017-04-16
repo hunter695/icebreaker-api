@@ -27,28 +27,15 @@ export function getRandomDocument(db, col, amount=1) {
  * @param {object} db database from MongoDB connection
  * @param {string} callback collection name for database.
  * @param {object} id of document to update.
- * @param {integer} amount of likes to increment
+ * @param {integer} amount of likes to increment or decrement
  */
-export function addLikes(db, col, id, amount=1) {
+export function adjustLikes(db, col, id, amount) {
   if (!db) {
     throw Error('ERROR: invalid database!')
   } else {
-    return db.collection(col).update({ _id: id }, { $inc: { likes: amount } })
-  }
-}
-
-/**
- * Increments dislikes of document with _id id by amount
- * @param {object} db database from MongoDB connection
- * @param {string} callback collection name for database.
- * @param {object} id of document to update.
- * @param {integer} amount of likes to increment
- */
-export function addDislikes(db, col, id, amount=1) {
-  if (!db) {
-    throw Error('ERROR: invalid database!')
-  } else {
-    return db.collection(col).update({ _id: id }, { $inc: { dislikes: amount } })
+    return amount < 0 ?
+      db.collection(col).update({ _id: id }, { $inc: { likes: amount } }) :
+      db.collection(col).update({ _id: id }, { $inc: { dislikes: amount } })
   }
 }
 
