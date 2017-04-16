@@ -40,7 +40,7 @@ export function adjustLikes(db, col, id, amount) {
  * should be:
  *
  *  {
- *    "text" : "tasty meatloaf",
+ *   "text" : "tasty meatloaf",
  *   "author" : "Gordon Ramsay",
  *   "likes" : 2,
  *   "dislikes" : 123
