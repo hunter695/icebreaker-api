@@ -2,7 +2,9 @@ import express from 'express'
 import mongodb from 'mongodb'
 import bodyParser from 'body-parser'
 import config from './src/config'
-import { getRandomDocument, storeContribution } from './src/mongodb'
+import {
+  getRandomDocument, storeContribution, adjustLikes,
+} from './src/mongodb'
 const app = express()
 
 app.use(bodyParser.json())
@@ -56,6 +58,15 @@ app.post('/pickup', async (req, res) => {
   } catch (e) {
     res.send(e)
   }
+})
+
+app.post('/like', (req, res) => {
+  let { collection, id, amount } = req.body
+  amount = parseInt(amount)
+  const o_id = mongodb.ObjectID(id)
+  console.log(o_id)
+  adjustLikes(db, collection, o_id, amount)
+  res.status(200).send()
 })
 
 MongoClient.connect(mongodbURL, (err, database) => {
