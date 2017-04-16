@@ -5,20 +5,16 @@
  * @param {string} amount amount of randomly selected documents to retrieve.
  * @return {object} promise to retrieve a randomly selected document.
  */
-export function getRandomDocument(db, col, amount=1) {
+export function getRandomDocument(db, col) {
   return new Promise((resolve, reject) => {
     if (!db) {
       reject('ERROR: invalid database!')
     }
-    const cursor = db.collection(col)
-    .aggregate([{ $sample: { size: amount } }])
-    cursor.each((err, doc) => {
-      if (doc) {
-        resolve(doc)
-      } else {
-        reject('ERROR: Unable to retrieve document')
-      }
-    })
+    db.collection(col)
+      .aggregate([{ $sample: { size: 1 } }], (err, result) => {
+        if (err) reject(err)
+        resolve(result[0])
+      })
   })
 }
 
