@@ -41,7 +41,7 @@ it('Randomly sampling collection should return a document', async () => {
     }
 
     const insertedId = await storeObject(db, 'test', content)
-    const sample = await getRandomDocument(db, 'test', 1)
+    const sample = await getRandomDocument(db, 'test')
     expect(sample.text).toBeTruthy()
     await db.collection('test').remove({ _id: insertedId })
   } finally {
