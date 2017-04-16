@@ -30,8 +30,8 @@ export function adjustLikes(db, col, id, amount) {
     throw Error('ERROR: invalid database!')
   } else {
     return amount < 0 ?
-      db.collection(col).update({ _id: id }, { $inc: { likes: amount } }) :
-      db.collection(col).update({ _id: id }, { $inc: { dislikes: amount } })
+      db.collection(col).update({ _id: id }, { $inc: { dislikes: amount } }) :
+      db.collection(col).update({ _id: id }, { $inc: { likes: amount } })
   }
 }
 
