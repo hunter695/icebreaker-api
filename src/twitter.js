@@ -33,16 +33,16 @@ export async function getTweet(content, daysBack) {
   } catch (twitterError) {
     throw Error(twitterError)
   }
-  let result
   const tweet = twitterResult.data.statuses
   if (twitterResult.resp.statusCode === 200 && (Array.isArray(tweet) && tweet.length !== 0)) {
-    result = {
+    return {
       text: tweet[0].text,
       author: tweet[0].user.screen_name,
       retweet_count: tweet[0].retweet_count,
       source: tweet[0].source,
       created_at: tweet[0].created_at,
     }
+  } else {
+    return {}
   }
-  return result
 }
