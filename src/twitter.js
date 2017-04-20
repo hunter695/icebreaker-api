@@ -42,7 +42,9 @@ export async function getTweet(content, daysBack) {
       source: tweet[0].source,
       created_at: tweet[0].created_at,
     }
-  } else {
+  } else if (twitterResult.resp.statusCode === 200) {
     return {}
+  } else {
+    return null
   }
 }
