@@ -1,4 +1,4 @@
-import { getRandomDocument, storeObject, storeContribution } from '../mongodb'
+import { getRandomDocument, storeObject, storeContribution, adjustLikes } from '../mongodb'
 import config from '../config' // for Twitter API keys and MongoDB URL
 
 const mongodb = require('mongodb')
@@ -62,6 +62,29 @@ it('storeContribution test', async () => {
     expect(cursor).toBeTruthy()
     const retrievedText = cursor.text
     expect(retrievedText).toBe('tasty meatloaf')
+    await db.collection('test').remove({ _id: insertedId })
+  } finally {
+    db.close()
+  }
+})
+
+it('adjustLikes test', async () => {
+  const db = await mongodb.MongoClient.connect(config.mongodb.url)
+  try {
+    expect(db).toBeTruthy()
+    const content = {
+      text: 'tasty meatloaf',
+      author: 'Gordon Ramsay',
+      likes: 2,
+      dislikes: 123,
+    }
+    const insertedId = await storeObject(db, 'test', content)
+    await adjustLikes(db, 'test', insertedId, 3)
+    await adjustLikes(db, 'test', insertedId, -10)
+    const cursor = await db.collection('test').findOne({ _id: insertedId }, {})
+    // tests likes and dislikes
+    expect(cursor.likes).toBe(5)
+    expect(cursor.dislikes).toBe(133)
     await db.collection('test').remove({ _id: insertedId })
   } finally {
     db.close()
