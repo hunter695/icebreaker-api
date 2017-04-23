@@ -9,7 +9,6 @@ const T = twit(config.twitter)
 /**
  * Returns tweet details with hashtage of content param.
  * @param {string} content a string such as 'pickupline(s)' or 'icebreaker(s)'
- * @param {number} amount how many tweets you want back.
  * @param {string} daysBack how far back in time to get tweets
  * @return {object} object containing tweet information.
  */

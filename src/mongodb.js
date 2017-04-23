@@ -2,7 +2,6 @@
  * Randomly samples a document from 'wildcard' database.
  * @param {object} db database from MongoDB connection.
  * @param {string} col collection name of wildcard database.
- * @param {string} amount amount of randomly selected documents to retrieve.
  * @return {object} promise to retrieve a randomly selected document.
  */
 export function getRandomDocument(db, col) {
@@ -28,7 +27,7 @@ export function getRandomDocument(db, col) {
 /**
  * increments likes of document with _id id by amount
  * @param {object} db database from MongoDB connection
- * @param {string} callback collection name for database.
+ * @param {string} col collection name for database.
  * @param {object} id of document to update.
  * @param {integer} amount of likes or dislikes to increment
  */
