@@ -5,6 +5,7 @@ import config from './src/config'
 import {
   getRandomDocument, storeContribution, adjustLikes,
 } from './src/mongodb'
+import { getTweet } from './src/twitter'
 const app = express()
 
 app.use(bodyParser.json())
@@ -31,7 +32,9 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 app.get('/icebreaker', async (req, res) => {
   if (req.query.wild === 'true') {
-    res.send(await getRandomDocument(db, ICEBREAKER_WILD))
+    const tweet = await getTweet('icebreaker', 7)
+    const userSubmittedWildcard = await getRandomDocument(db, ICEBREAKER_WILD)
+    res.send(Math.random() < .5 ? tweet : userSubmittedWildcard)
   } else {
     res.send(await getRandomDocument(db, ICEBREAKER_CURATED))
   }
@@ -39,7 +42,9 @@ app.get('/icebreaker', async (req, res) => {
 
 app.get('/pickup', async (req, res) => {
   if (req.query.wild === 'true') {
-    res.send(await getRandomDocument(db, PICKUP_WILD))
+    const tweet = await getTweet('pickupline', 7)
+    const userSubmittedWildcard = await getRandomDocument(db, PICKUP_WILD)
+    res.send(Math.random() < .5 ? tweet : userSubmittedWildcard)
   } else {
     res.send(await getRandomDocument(db, PICKUP_CURATED))
   }
