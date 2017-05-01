@@ -25,16 +25,20 @@ export async function getTweet(content, daysBack) {
     result_type: 'recent',
     count: 100,
   }
-  const randomValue = Math.floor(Math.random() * 100)
+
   let twitterResult
   try {
     twitterResult = await T.get('search/tweets', params)
   } catch (twitterError) {
     throw Error(twitterError)
   }
+
   const tweets = twitterResult.data.statuses
-  const tweet = tweets[randomValue]
+
   if (twitterResult.resp.statusCode === 200 && (Array.isArray(tweets) && tweets.length !== 0)) {
+    const randomValue = Math.floor(Math.random() * tweets.length)
+    const tweet = tweets[randomValue]
+
     return {
       text: tweet.text,
       author: tweet.user.screen_name,
