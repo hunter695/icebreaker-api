@@ -19,27 +19,28 @@ export async function getTweet(content, daysBack) {
   } catch (getErr) {
     throw Error(getErr)
   }
-  // console.log(date)
   const params = {
     q: `#${content} since:${date}`,
     lang: 'en',
     result_type: 'recent',
-    count: 1,
+    count: 100,
   }
+  const randomValue = Math.floor(Math.random() * 100)
   let twitterResult
   try {
     twitterResult = await T.get('search/tweets', params)
   } catch (twitterError) {
     throw Error(twitterError)
   }
-  const tweet = twitterResult.data.statuses
-  if (twitterResult.resp.statusCode === 200 && (Array.isArray(tweet) && tweet.length !== 0)) {
+  const tweets = twitterResult.data.statuses
+  const tweet = tweets[randomValue]
+  if (twitterResult.resp.statusCode === 200 && (Array.isArray(tweets) && tweets.length !== 0)) {
     return {
-      text: tweet[0].text,
-      author: tweet[0].user.screen_name,
-      retweet_count: tweet[0].retweet_count,
-      source: tweet[0].source,
-      created_at: tweet[0].created_at,
+      text: tweet.text,
+      author: tweet.user.screen_name,
+      retweets_count: tweet.retweet_count,
+      source: tweet.source,
+      created_at: tweet.created_at,
     }
   } else if (twitterResult.resp.statusCode === 200) {
     return {}
