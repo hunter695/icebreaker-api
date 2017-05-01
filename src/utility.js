@@ -11,7 +11,7 @@ export function getPastDate(daysBack) {
     let month = someDaysAgo.getMonth()
     month += 1
     const date = someDaysAgo.getDate()
-    const result = `${year}-${month}-${date}`
+    const result = `${year}-${month < 10 ? 0 : ''}${month}-${date}`
     if (someDaysAgo) {
       resolve(result)
     } else {
