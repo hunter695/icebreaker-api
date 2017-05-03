@@ -10,15 +10,15 @@ $ touch config.js
 
 ```javascript
 module.exports = {
-	twitter: {
-		consumer_key: '...',
-		consumer_secret: '...',
+  twitter: {
+    consumer_key: '...',
+    consumer_secret: '...',
     app_only_auth: true,
-		timeout_ms: 60 * 1000, // optional HTTP request timeout to apply to all requests.
-	},
-	mongodb: {
-		url: 'mongodb://localhost:27017/icebreaker',
-	},
+    timeout_ms: 60 * 1000, // optional HTTP request timeout to apply to all requests.
+  },
+  mongodb: {
+    url: 'mongodb://localhost:27017/icebreaker',
+  },
 }
 ```
 
