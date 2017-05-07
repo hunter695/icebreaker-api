@@ -15,7 +15,7 @@ const T = twit(config.twitter)
 export async function getTweet(content, daysBack) {
   let date
   try {
-    date = await getPastDate(daysBack)
+    date = await getPastDate(new Date(), daysBack)
   } catch (getErr) {
     throw Error(getErr)
   }
