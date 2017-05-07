@@ -16,6 +16,8 @@ app.use(function(req, res, next) {
   next()
 })
 
+app.use(express.static('build'))
+
 const mongodbURL = config.mongodb.url
 const MongoClient = mongodb.MongoClient
 
