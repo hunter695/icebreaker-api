@@ -16,6 +16,8 @@ app.use(function(req, res, next) {
   next()
 })
 
+app.use(express.static('build'))
+
 const mongodbURL = config.mongodb.url
 const MongoClient = mongodb.MongoClient
 
@@ -27,8 +29,6 @@ const PICKUP_WILD = 'pickupline_wild'
 let db
 
 const PORT = process.env.PORT || 3000
-
-app.get('/', (req, res) => res.send('Hello World!'))
 
 app.get('/icebreaker', async (req, res) => {
   if (req.query.wild === 'true') {
