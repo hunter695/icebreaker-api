@@ -28,8 +28,6 @@ let db
 
 const PORT = process.env.PORT || 3000
 
-app.get('/', (req, res) => res.send('Hello World!'))
-
 app.get('/icebreaker', async (req, res) => {
   if (req.query.wild === 'true') {
     const tweet = await getTweet('icebreaker', 7)
