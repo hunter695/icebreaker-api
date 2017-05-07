@@ -13,8 +13,10 @@ it('Should be able to fetch content from Twitter', async () => {
     idString = data.id_str
   })
   // get message from Twitter with #helloworld
-  let result = await getTweet('helloworld', daysBack)
-  expect(result).toBeTruthy()
+  let result = await getTweet('helloworld', daysBack);
+  ['text', 'author', 'retweets_count', 'source', 'created_at'].forEach((key) => {
+    expect(key in result).toEqual(true)
+  })
   // delete the message
   if (idString){
     await T.post('statuses/destroy/:id', { id: idString })
