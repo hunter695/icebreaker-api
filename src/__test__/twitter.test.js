@@ -5,7 +5,7 @@ it('Should be able to fetch content from Twitter', async () => {
 
   // get message from Twitter with #helloworld
   let result = await getTweet('helloworld', daysBack);
-  ['text', 'author', 'retweets_count', 'source', 'created_at'].forEach((key) => {
+  ['text', 'author', 'retweet_count', 'source', 'created_at'].forEach((key) => {
     expect(key in result).toEqual(true)
   })
 })

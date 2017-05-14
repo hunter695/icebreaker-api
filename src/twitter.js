@@ -42,7 +42,7 @@ export async function getTweet(content, daysBack) {
     return {
       text: tweet.text,
       author: tweet.user.screen_name,
-      retweets_count: tweet.retweet_count,
+      retweet_count: tweet.retweet_count,
       source: tweet.source,
       created_at: tweet.created_at,
     }
